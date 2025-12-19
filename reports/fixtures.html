@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fixture Analysis Report</title>
+    
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 20px;
+        min-height: 100vh;
+    }
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        overflow: hidden;
+    }
+    .header {
+        background: linear-gradient(135deg, #37003c 0%, #4a0049 100%);
+        color: white;
+        padding: 40px;
+        text-align: center;
+    }
+    .header h1 { font-size: 2.5em; margin-bottom: 10px; }
+    .header p { color: #00ff87; font-size: 1.1em; }
+    .nav {
+        background: #f8f9fa;
+        padding: 20px;
+        border-bottom: 3px solid #37003c;
+    }
+    .nav a {
+        display: inline-block;
+        margin: 5px 10px;
+        padding: 10px 20px;
+        background: #37003c;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background 0.3s;
+    }
+    .nav a:hover { background: #5c0061; }
+    .content { padding: 40px; }
+    .section {
+        background: #f8f9fa;
+        padding: 25px;
+        margin: 20px 0;
+        border-radius: 10px;
+        border-left: 5px solid #37003c;
+    }
+    .section h2 {
+        color: #37003c;
+        margin-bottom: 20px;
+        font-size: 1.8em;
+    }
+    .section h3 {
+        color: #5c0061;
+        margin: 20px 0 10px;
+        font-size: 1.3em;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+        background: white;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    th {
+        background: #37003c;
+        color: white;
+        padding: 15px;
+        text-align: left;
+        font-weight: 600;
+    }
+    td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #e0e0e0;
+    }
+    tr:hover { background: #f5f5f5; }
+    .highlight {
+        background: #00ff87;
+        color: #37003c;
+        padding: 3px 8px;
+        border-radius: 3px;
+        font-weight: bold;
+    }
+    .badge {
+        display: inline-block;
+        padding: 5px 10px;
+        border-radius: 15px;
+        font-size: 0.85em;
+        font-weight: bold;
+    }
+    .badge-success { background: #00ff87; color: #37003c; }
+    .badge-warning { background: #ffc107; color: #333; }
+    .badge-danger { background: #dc3545; color: white; }
+    .badge-info { background: #17a2b8; color: white; }
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin: 20px 0;
+    }
+    .stat-card {
+        background: white;
+        padding: 25px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        border-top: 4px solid #37003c;
+    }
+    .stat-card h3 { color: #37003c; margin-bottom: 10px; }
+    .stat-card .value {
+        font-size: 2.5em;
+        font-weight: bold;
+        color: #00ff87;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+    .footer {
+        background: #f8f9fa;
+        padding: 30px;
+        text-align: center;
+        color: #666;
+        border-top: 3px solid #37003c;
+    }
+    .timestamp {
+        color: #999;
+        font-size: 0.9em;
+        margin-top: 10px;
+    }
+</style>
+
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📅 Fixture Analysis Report</h1>
+            <p>Upcoming fixtures and difficulty ratings</p>
+        </div>
+
+        <div class="nav">
+            <a href="index.html">🏠 Dashboard</a>
+            <a href="players.html">👤 Players</a>
+            <a href="fixtures.html">📅 Fixture Analysis</a>
+            <a href="transfers.html">🔄 Transfers</a>
+        </div>
+
+        <div class="content">
+            <div class="section">
+                <h2>✅ Best Upcoming Fixtures (Next 5 GWs)</h2>
+                <p>Teams with the easiest fixtures ahead:</p>
+                <table class="dataframe data-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>team</th>
+      <th>team_name</th>
+      <th>avg_difficulty</th>
+      <th>fixtures</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>WHU</td>
+      <td>West Ham</td>
+      <td>2.4</td>
+      <td>MCI(A) WHU(A) WHU(A) WOL(A) WHU(A)</td>
+    </tr>
+    <tr>
+      <td>BUR</td>
+      <td>Burnley</td>
+      <td>2.6</td>
+      <td>BOU(A) BUR(A) BUR(A) BHA(A) BUR(A)</td>
+    </tr>
+    <tr>
+      <td>FUL</td>
+      <td>Fulham</td>
+      <td>2.8</td>
+      <td>FUL(A) WHU(A) CRY(A) FUL(A) FUL(A)</td>
+    </tr>
+    <tr>
+      <td>NFO</td>
+      <td>Nott'm Forest</td>
+      <td>2.8</td>
+      <td>FUL(A) NFO(A) NFO(A) AVL(A) WHU(A)</td>
+    </tr>
+    <tr>
+      <td>MUN</td>
+      <td>Man Utd</td>
+      <td>2.8</td>
+      <td>AVL(A) MUN(A) MUN(A) LEE(A) BUR(A)</td>
+    </tr>
+    <tr>
+      <td>EVE</td>
+      <td>Everton</td>
+      <td>2.8</td>
+      <td>EVE(A) BUR(A) NFO(A) EVE(A) EVE(A)</td>
+    </tr>
+    <tr>
+      <td>WOL</td>
+      <td>Wolves</td>
+      <td>2.8</td>
+      <td>WOL(A) LIV(A) MUN(A) WOL(A) EVE(A)</td>
+    </tr>
+    <tr>
+      <td>BRE</td>
+      <td>Brentford</td>
+      <td>2.8</td>
+      <td>WOL(A) BRE(A) BRE(A) EVE(A) BRE(A)</td>
+    </tr>
+    <tr>
+      <td>SUN</td>
+      <td>Sunderland</td>
+      <td>3.0</td>
+      <td>BHA(A) SUN(A) SUN(A) TOT(A) BRE(A)</td>
+    </tr>
+    <tr>
+      <td>CRY</td>
+      <td>Crystal Palace</td>
+      <td>3.2</td>
+      <td>LEE(A) CRY(A) CRY(A) NEW(A) CRY(A)</td>
+    </tr>
+  </tbody>
+</table>
+            </div>
+
+            <div class="section">
+                <h2>⚠️ Worst Upcoming Fixtures (Next 5 GWs)</h2>
+                <p>Teams with the toughest fixtures ahead:</p>
+                <table class="dataframe data-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>team</th>
+      <th>team_name</th>
+      <th>avg_difficulty</th>
+      <th>fixtures</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ARS</td>
+      <td>Arsenal</td>
+      <td>4.4</td>
+      <td>EVE(A) ARS(A) ARS(A) BOU(A) ARS(A)</td>
+    </tr>
+    <tr>
+      <td>LIV</td>
+      <td>Liverpool</td>
+      <td>3.8</td>
+      <td>TOT(A) LIV(A) LIV(A) FUL(A) ARS(A)</td>
+    </tr>
+    <tr>
+      <td>BOU</td>
+      <td>Bournemouth</td>
+      <td>3.6</td>
+      <td>BOU(A) BRE(A) CHE(A) BOU(A) BOU(A)</td>
+    </tr>
+    <tr>
+      <td>MCI</td>
+      <td>Man City</td>
+      <td>3.6</td>
+      <td>MCI(A) NFO(A) SUN(A) MCI(A) MCI(A)</td>
+    </tr>
+    <tr>
+      <td>BHA</td>
+      <td>Brighton</td>
+      <td>3.4</td>
+      <td>BHA(A) ARS(A) WHU(A) BHA(A) MCI(A)</td>
+    </tr>
+    <tr>
+      <td>CHE</td>
+      <td>Chelsea</td>
+      <td>3.4</td>
+      <td>NEW(A) CHE(A) CHE(A) MCI(A) FUL(A)</td>
+    </tr>
+    <tr>
+      <td>AVL</td>
+      <td>Aston Villa</td>
+      <td>3.4</td>
+      <td>AVL(A) CHE(A) ARS(A) AVL(A) CRY(A)</td>
+    </tr>
+    <tr>
+      <td>NEW</td>
+      <td>Newcastle</td>
+      <td>3.4</td>
+      <td>NEW(A) MUN(A) BUR(A) NEW(A) NEW(A)</td>
+    </tr>
+    <tr>
+      <td>LEE</td>
+      <td>Leeds</td>
+      <td>3.4</td>
+      <td>LEE(A) SUN(A) LIV(A) LEE(A) NEW(A)</td>
+    </tr>
+    <tr>
+      <td>TOT</td>
+      <td>Spurs</td>
+      <td>3.2</td>
+      <td>TOT(A) CRY(A) BRE(A) TOT(A) BOU(A)</td>
+    </tr>
+  </tbody>
+</table>
+            </div>
+
+            <div class="section">
+                <h2>📊 Fixture Ticker</h2>
+                <p>Complete fixture overview for all teams (H=Home, A=Away, [Difficulty]):</p>
+                <div style="overflow-x: auto;">
+                    <table class="dataframe data-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>team</th>
+      <th>GW16</th>
+      <th>GW17</th>
+      <th>GW18</th>
+      <th>GW19</th>
+      <th>GW20</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ARS</td>
+      <td>EVE(A)[3]</td>
+      <td>ARS(A)[5]</td>
+      <td>ARS(A)[5]</td>
+      <td>BOU(A)[4]</td>
+      <td>ARS(A)[5]</td>
+    </tr>
+    <tr>
+      <td>AVL</td>
+      <td>AVL(A)[3]</td>
+      <td>CHE(A)[3]</td>
+      <td>ARS(A)[5]</td>
+      <td>AVL(A)[3]</td>
+      <td>CRY(A)[3]</td>
+    </tr>
+    <tr>
+      <td>BUR</td>
+      <td>BOU(A)[4]</td>
+      <td>BUR(A)[2]</td>
+      <td>BUR(A)[2]</td>
+      <td>BHA(A)[3]</td>
+      <td>BUR(A)[2]</td>
+    </tr>
+    <tr>
+      <td>BOU</td>
+      <td>BOU(A)[4]</td>
+      <td>BRE(A)[3]</td>
+      <td>CHE(A)[3]</td>
+      <td>BOU(A)[4]</td>
+      <td>BOU(A)[4]</td>
+    </tr>
+    <tr>
+      <td>BRE</td>
+      <td>WOL(A)[2]</td>
+      <td>BRE(A)[3]</td>
+      <td>BRE(A)[3]</td>
+      <td>EVE(A)[3]</td>
+      <td>BRE(A)[3]</td>
+    </tr>
+    <tr>
+      <td>BHA</td>
+      <td>BHA(A)[3]</td>
+      <td>ARS(A)[5]</td>
+      <td>WHU(A)[2]</td>
+      <td>BHA(A)[3]</td>
+      <td>MCI(A)[4]</td>
+    </tr>
+    <tr>
+      <td>CHE</td>
+      <td>NEW(A)[4]</td>
+      <td>CHE(A)[3]</td>
+      <td>CHE(A)[3]</td>
+      <td>MCI(A)[4]</td>
+      <td>FUL(A)[3]</td>
+    </tr>
+    <tr>
+      <td>CRY</td>
+      <td>LEE(A)[3]</td>
+      <td>CRY(A)[3]</td>
+      <td>CRY(A)[3]</td>
+      <td>NEW(A)[4]</td>
+      <td>CRY(A)[3]</td>
+    </tr>
+    <tr>
+      <td>EVE</td>
+      <td>EVE(A)[3]</td>
+      <td>BUR(A)[2]</td>
+      <td>NFO(A)[3]</td>
+      <td>EVE(A)[3]</td>
+      <td>EVE(A)[3]</td>
+    </tr>
+    <tr>
+      <td>FUL</td>
+      <td>FUL(A)[3]</td>
+      <td>WHU(A)[2]</td>
+      <td>CRY(A)[3]</td>
+      <td>FUL(A)[3]</td>
+      <td>FUL(A)[3]</td>
+    </tr>
+    <tr>
+      <td>LEE</td>
+      <td>LEE(A)[3]</td>
+      <td>SUN(A)[3]</td>
+      <td>LIV(A)[4]</td>
+      <td>LEE(A)[3]</td>
+      <td>NEW(A)[4]</td>
+    </tr>
+    <tr>
+      <td>LIV</td>
+      <td>TOT(A)[3]</td>
+      <td>LIV(A)[4]</td>
+      <td>LIV(A)[4]</td>
+      <td>FUL(A)[3]</td>
+      <td>ARS(A)[5]</td>
+    </tr>
+    <tr>
+      <td>MCI</td>
+      <td>MCI(A)[4]</td>
+      <td>NFO(A)[3]</td>
+      <td>SUN(A)[3]</td>
+      <td>MCI(A)[4]</td>
+      <td>MCI(A)[4]</td>
+    </tr>
+    <tr>
+      <td>MUN</td>
+      <td>AVL(A)[3]</td>
+      <td>MUN(A)[3]</td>
+      <td>MUN(A)[3]</td>
+      <td>LEE(A)[3]</td>
+      <td>BUR(A)[2]</td>
+    </tr>
+    <tr>
+      <td>NEW</td>
+      <td>NEW(A)[4]</td>
+      <td>MUN(A)[3]</td>
+      <td>BUR(A)[2]</td>
+      <td>NEW(A)[4]</td>
+      <td>NEW(A)[4]</td>
+    </tr>
+    <tr>
+      <td>NFO</td>
+      <td>FUL(A)[3]</td>
+      <td>NFO(A)[3]</td>
+      <td>NFO(A)[3]</td>
+      <td>AVL(A)[3]</td>
+      <td>WHU(A)[2]</td>
+    </tr>
+    <tr>
+      <td>SUN</td>
+      <td>BHA(A)[3]</td>
+      <td>SUN(A)[3]</td>
+      <td>SUN(A)[3]</td>
+      <td>TOT(A)[3]</td>
+      <td>BRE(A)[3]</td>
+    </tr>
+    <tr>
+      <td>TOT</td>
+      <td>TOT(A)[3]</td>
+      <td>CRY(A)[3]</td>
+      <td>BRE(A)[3]</td>
+      <td>TOT(A)[3]</td>
+      <td>BOU(A)[4]</td>
+    </tr>
+    <tr>
+      <td>WHU</td>
+      <td>MCI(A)[4]</td>
+      <td>WHU(A)[2]</td>
+      <td>WHU(A)[2]</td>
+      <td>WOL(A)[2]</td>
+      <td>WHU(A)[2]</td>
+    </tr>
+    <tr>
+      <td>WOL</td>
+      <td>WOL(A)[2]</td>
+      <td>LIV(A)[4]</td>
+      <td>MUN(A)[3]</td>
+      <td>WOL(A)[2]</td>
+      <td>EVE(A)[3]</td>
+    </tr>
+  </tbody>
+</table>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>FPL Analysis Project</strong></p>
+            <p class="timestamp">Generated: 2025-12-19 20:15:53</p>
+        </div>
+    </div>
+</body>
+</html>

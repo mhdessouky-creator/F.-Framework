@@ -1,0 +1,21 @@
+Testing FPL API Client...
+
+1. Fetching bootstrap-static data...
+   ✓ Found 760 players
+   ✓ Found 20 teams
+   ✓ Found 38 gameweeks
+
+2. Getting current gameweek...
+   ✓ Current gameweek: 16
+
+3. Fetching fixtures...
+   ✓ Found 380 fixtures
+
+4. Fetching player summary (Salah - ID 300)...
+   ✓ Got history: 16 past gameweeks
+   ✓ Got fixtures: 22 upcoming fixtures
+
+5. Cache information...
+   ✓ Cached endpoints: 3
+
+✅ All API tests passed!

@@ -1,0 +1,93 @@
+Testing Player Analyzer...
+
+1. Top 5 Form Players:
+      web_name    team_name  ... selected_by_percent  points_per_million
+0        Foden     Man City  ...                38.3               10.00
+1  B.Fernandes      Man Utd  ...                29.7               10.54
+2       Wilson       Fulham  ...                15.7               13.93
+3       Rogers  Aston Villa  ...                13.7               10.70
+4     Chalobah      Chelsea  ...                18.4               16.55
+
+[5 rows x 9 columns]
+
+2. Best Value Players (under £7m):
+   web_name       team_name  ... form  selected_by_percent
+0     Guéhi  Crystal Palace  ...  5.6                 41.2
+1     Keane         Everton  ...  4.2                  3.2
+2  Chalobah         Chelsea  ...  7.2                 18.4
+3  Richards  Crystal Palace  ...  4.2                  4.3
+4   Lacroix  Crystal Palace  ...  5.0                  7.2
+
+[5 rows x 8 columns]
+
+3. Differential Picks:
+    web_name       team_name  ... diff_score  points_per_million
+0      Gusto         Chelsea  ...      78.88               13.60
+1  Van Hecke        Brighton  ...      74.62               14.35
+2      Keane         Everton  ...      70.31               16.74
+3  Tavernier     Bournemouth  ...      67.81               13.04
+4   Richards  Crystal Palace  ...      66.65               15.87
+
+[5 rows x 9 columns]
+
+✅ Player Analyzer tests passed!
+Testing Fixture Analyzer...
+
+1. Best Upcoming Fixtures (next 5 GWs):
+  team      team_name  avg_difficulty                            fixtures
+0  WHU       West Ham             2.4  MCI(A) WHU(A) WHU(A) WOL(A) WHU(A)
+1  BUR        Burnley             2.6  BOU(A) BUR(A) BUR(A) BHA(A) BUR(A)
+2  FUL         Fulham             2.8  FUL(A) WHU(A) CRY(A) FUL(A) FUL(A)
+3  NFO  Nott'm Forest             2.8  FUL(A) NFO(A) NFO(A) AVL(A) WHU(A)
+4  MUN        Man Utd             2.8  AVL(A) MUN(A) MUN(A) LEE(A) BUR(A)
+
+2. Arsenal's Next 5 Fixtures:
+   event home_short away_short  team_h_difficulty  team_a_difficulty
+0     17        EVE        ARS                  4                  3
+1     18        ARS        BHA                  3                  5
+2     19        ARS        AVL                  3                  5
+3     20        BOU        ARS                  4                  4
+4     21        ARS        LIV                  4                  5
+
+3. Double Gameweeks:
+   No double gameweeks found
+
+✅ Fixture Analyzer tests passed!
+Testing Transfer Advisor...
+
+1. Top Transfer Targets:
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/fpl_project/src/analysis/transfer_advisor.py", line 346, in <module>
+    print(advisor.get_transfer_targets(5))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/data/com.termux/files/home/fpl_project/src/analysis/transfer_advisor.py", line 47, in get_transfer_targets
+    df = df[df['position'] == position.upper()]
+                              ^^^^^^^^^^^^^^
+AttributeError: 'int' object has no attribute 'upper'
+Testing Transfer Advisor...
+
+1. Top Transfer Targets:
+      web_name    team_name  ... transfer_score  total_points
+0        Foden     Man City  ...          52.80            88
+1  B.Fernandes      Man Utd  ...          48.16            98
+2       Wilson       Fulham  ...          45.98            78
+3       Rogers  Aston Villa  ...          40.81            76
+4     Chalobah      Chelsea  ...          38.56            91
+
+[5 rows x 9 columns]
+
+2. Captain Picks for Next GW:
+      web_name team_name  ... captain_score selected_by_percent
+0        Foden  Man City  ...          67.3                38.3
+1  B.Fernandes   Man Utd  ...          62.1                29.7
+2       Wilson    Fulham  ...          57.2                15.7
+3     Chalobah   Chelsea  ...          46.1                18.4
+4      Haaland  Man City  ...          45.4                73.7
+
+[5 rows x 8 columns]
+
+3. Chip Strategy:
+   Current GW: 16
+   Wildcard: Neutral - No strong signal for Wildcard
+
+✅ Transfer Advisor tests passed!
