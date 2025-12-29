@@ -5,7 +5,6 @@ Analyzes player performance, form, value, and differentials
 import pandas as pd
 from typing import List, Dict, Optional
 import sys
-sys.path.append('/data/data/com.termux/files/home/fpl_project')
 from src.api.fpl_client import FPLClient
 
 

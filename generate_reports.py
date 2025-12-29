@@ -2,8 +2,8 @@
 HTML Report Generator for FPL Analysis
 Generates comprehensive HTML reports and dashboard
 """
+import os
 import sys
-sys.path.append('/data/data/com.termux/files/home/fpl_project')
 
 from src.api.fpl_client import FPLClient
 from src.analysis.player_analyzer import PlayerAnalyzer
@@ -263,10 +263,12 @@ def generate_dashboard():
 </body>
 </html>"""
 
-    with open('/data/data/com.termux/files/home/fpl_project/reports/index.html', 'w') as f:
+    output_path = os.path.join("reports", "index.html")
+    os.makedirs("reports", exist_ok=True)
+    with open(output_path, 'w') as f:
         f.write(html)
 
-    print("✅ Dashboard generated: reports/index.html")
+    print(f"✅ Dashboard generated: {output_path}")
 
 
 def generate_player_report():
@@ -334,10 +336,11 @@ def generate_player_report():
 </body>
 </html>"""
 
-    with open('/data/data/com.termux/files/home/fpl_project/reports/players.html', 'w') as f:
+    output_path = os.path.join("reports", "players.html")
+    with open(output_path, 'w') as f:
         f.write(html)
 
-    print("✅ Player report generated: reports/players.html")
+    print(f"✅ Player report generated: {output_path}")
 
 
 def generate_fixture_report():
@@ -407,10 +410,11 @@ def generate_fixture_report():
 </body>
 </html>"""
 
-    with open('/data/data/com.termux/files/home/fpl_project/reports/fixtures.html', 'w') as f:
+    output_path = os.path.join("reports", "fixtures.html")
+    with open(output_path, 'w') as f:
         f.write(html)
 
-    print("✅ Fixture report generated: reports/fixtures.html")
+    print(f"✅ Fixture report generated: {output_path}")
 
 
 def generate_transfer_report():
@@ -491,10 +495,11 @@ def generate_transfer_report():
 </body>
 </html>"""
 
-    with open('/data/data/com.termux/files/home/fpl_project/reports/transfers.html', 'w') as f:
+    output_path = os.path.join("reports", "transfers.html")
+    with open(output_path, 'w') as f:
         f.write(html)
 
-    print("✅ Transfer report generated: reports/transfers.html")
+    print(f"✅ Transfer report generated: {output_path}")
 
 
 if __name__ == "__main__":
