@@ -3,7 +3,6 @@ Comprehensive Test Suite for FPL Analysis Project
 Tests all components: API client, analyzers, and integration
 """
 import sys
-sys.path.append('/data/data/com.termux/files/home/fpl_project')
 
 from src.api.fpl_client import FPLClient
 from src.analysis.player_analyzer import PlayerAnalyzer
